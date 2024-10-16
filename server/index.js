@@ -8,7 +8,7 @@ const mongoDb = require('./config/mongodb')
 const app =express()
 app.use(cors(
     {
-        origin:['http://localhost:5173'],
+        origin:['http://localhost:5173','https://mern-todo-app83frontend.vercel.app'],
         credentials:true
     }
 ))
@@ -21,6 +21,13 @@ const userRoute= require('./routes/userRoute')
 app.use('/api',todoRoute)
 app.use('/',userRoute)
 
+
+
+
+
+app.all("*",(req,res)=>{
+    res.status(404).json({message:"end point does not exist"})
+  })
 
 app.listen(port,()=>{
     console.log('server runinng on  '+port);
